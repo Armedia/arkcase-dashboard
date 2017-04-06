@@ -29,7 +29,7 @@ angular.module('adf', ['adf.provider', 'ui.bootstrap'])
   .value('adfTemplatePath', '../src/templates/')
   .value('rowTemplate', '<adf-dashboard-row row="row" adf-model="adfModel" options="options" edit-mode="editMode" ng-repeat="row in column.rows" />')
   .value('columnTemplate', '<adf-dashboard-column column="column" adf-model="adfModel" options="options" edit-mode="editMode" ng-repeat="column in row.columns" />')
-  .value('adfVersion', '0.10.0');
+  .value('adfVersion', '0.10.1');
 
 /*
 * The MIT License
@@ -59,7 +59,7 @@ angular.module('adf', ['adf.provider', 'ui.bootstrap'])
 /* global angular */
 angular.module('adf')
   .directive('adfDashboardColumn', ["$log", "$compile", "adfTemplatePath", "rowTemplate", "dashboard", function ($log, $compile, adfTemplatePath, rowTemplate, dashboard) {
-    
+
 
     /**
      * moves a widget in between a column
@@ -137,7 +137,7 @@ angular.module('adf')
 			if (!targetColumn.widgets) {
 				targetColumn.widgets = [];
 			}
-			
+
             targetColumn.widgets.splice(evt.newIndex, 0, widget);
           });
         } else {
@@ -264,7 +264,7 @@ angular.module('adf')
 
 angular.module('adf')
   .directive('adfDashboard', ["$rootScope", "$log", "$modal", "dashboard", "adfTemplatePath", function ($rootScope, $log, $modal, dashboard, adfTemplatePath) {
-    
+
 
     function stringToBoolean(string){
       switch(angular.isDefined(string) ? string.toLowerCase() : null){
@@ -835,7 +835,7 @@ angular.module('adf.provider', [])
 /* global angular */
 angular.module('adf')
   .directive('adfDashboardRow', ["$compile", "adfTemplatePath", "columnTemplate", function ($compile, adfTemplatePath, columnTemplate) {
-    
+
 
     return {
       restrict: 'E',
@@ -1166,7 +1166,7 @@ angular.module('adf')
           };
           editScope.saveDialog = function() {
             definition.title = editScope.definition.title;
-            angular.extend(definition.config,editScope.definition.config);      
+            angular.extend(definition.config,editScope.definition.config);
             editScope.closeDialog();
          };
         };
@@ -1189,7 +1189,7 @@ angular.module('adf')
       },
 
       controller: ["$scope", function ($scope) {
-        
+
         $scope.$on("adfDashboardCollapseExapand",function(event,args){
            $scope.widgetState.isCollapsed = args.collapseExpandStatus;
          });
