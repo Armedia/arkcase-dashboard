@@ -1,3 +1,10 @@
+# 0.10.1
+
+## Enhancements
+
+* first use as a test for bower install
+
+
 # 0.10.0
 
 ## Enhancements
