@@ -79,6 +79,10 @@ angular.module('sample', [
     templateUrl: 'partials/sample.html',
     controller: 'sample04Ctrl'
   })
+      .when('/sample/99', {
+          templateUrl: 'partials/sampleWithFilter.html',
+          controller: 'sample99Ctrl'
+      })
   .otherwise({
     redirectTo: '/sample/01'
   });

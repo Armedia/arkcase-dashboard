@@ -24,57 +24,57 @@
 'use strict';
 
 angular.module('sample-99', ['adf', 'LocalStorageModule'])
-.controller('sample99Ctrl', function($scope, localStorageService) {
-  var name = 'sample-99';
-  var model = localStorageService.get(name);
-  if (!model) {
-    // set default model for demo purposes
-    model = {
-      title: "Sample 99",
-      titleTemplateUrl : "partials/custom-dashboard-title.html",
-      structure: "6-6",
-      rows: [{
-        columns: [{
-          styleClass: "col-md-6",
-          widgets: [{
-            title: 'Description',
-            titleTemplateUrl: 'partials/custom-widget-title.html',
-            type: 'markdown',
-            config: {
-              content: 'This sample uses a widget filter, to restrict the widget selection on the "add dialog".\n\nIt also shows the ability to use custom templates for the dashboard title and widget title.'
-            }
-          }]
-        }, {
-          styleClass: "col-md-6",
-          widgets: [{
-            title: 'Restangular',
-            titleTemplateUrl: 'partials/custom-widget-title.html',
-            type: 'githubAuthor',
-            config: {
-              path: 'mgonto/restangular'
-            }
-          }]
-        }]
-      }]
-    };
-  }
-  $scope.name = name;
-  $scope.model = model;
-  $scope.collapsible = true;
-  $scope.maximizable = false;
-  $scope.enableConfirmDelete = true;
+    .controller('sample99Ctrl', function($scope, localStorageService) {
+        var name = 'sample-99';
+        var model = localStorageService.get(name);
+        if (!model) {
+            // set default model for demo purposes
+            model = {
+                title: "Sample 99",
+                titleTemplateUrl : "partials/custom-dashboard-title.html",
+                structure: "6-6",
+                rows: [{
+                    columns: [{
+                        styleClass: "col-md-6",
+                        widgets: [{
+                            title: 'Description',
+                            titleTemplateUrl: 'partials/custom-widget-title.html',
+                            type: 'markdown',
+                            config: {
+                                content: 'This sample uses a widget filter, to restrict the widget selection on the "add dialog".\n\nIt also shows the ability to use custom templates for the dashboard title and widget title.'
+                            }
+                        }]
+                    }, {
+                        styleClass: "col-md-6",
+                        widgets: [{
+                            title: 'Restangular',
+                            titleTemplateUrl: 'partials/custom-widget-title.html',
+                            type: 'githubAuthor',
+                            config: {
+                                path: 'mgonto/restangular'
+                            }
+                        }]
+                    }]
+                }]
+            };
+        }
+        $scope.name = name;
+        $scope.model = model;
+        $scope.collapsible = true;
+        $scope.maximizable = false;
+        $scope.enableConfirmDelete = true;
 
-  // only allow github widgets
-  $scope.widgetFilter = function(widget, type){
-    return type.indexOf('github') >= 0 || type === 'markdown' || type === 'version';
-  };
+        // only allow github widgets
+        $scope.widgetFilter = function(widget, type){
+            return type.indexOf('github') >= 0 || type === 'markdown' || type === 'version';
+        };
 
-  // set our custom widget title template when widgets are added
-   $scope.$on('adfWidgetAdded',function(event,name,model,widget){
-     widget.titleTemplateUrl="partials/custom-widget-title.html";
-   });
+        // set our custom widget title template when widgets are added
+        $scope.$on('adfWidgetAdded',function(event,name,model,widget){
+            widget.titleTemplateUrl="partials/custom-widget-title.html";
+        });
 
-  $scope.$on('adfDashboardChanged', function(event, name, model) {
-    localStorageService.set(name, model);
-  });
-});
+        $scope.$on('adfDashboardChanged', function(event, name, model) {
+            localStorageService.set(name, model);
+        });
+    });
