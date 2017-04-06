@@ -1,3 +1,14 @@
+# 0.10.2
+
+## Enhancements
+
+* second test for bower install
+
+## Bug fixes
+
+* Fixed broken sample links
+* Fixed $http.get() exception in widget conent
+
 # 0.10.1
 
 ## Enhancements

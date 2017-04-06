@@ -52,15 +52,24 @@ angular.module('adf')
           deferred.resolve(tpl);
         } else {
           var url = $sce.getTrustedResourceUrl(parseUrl(widget.templateUrl));
-          $http.get(url)
-            .success(function(response){
-              // put response to cache, with unmodified url as key
-              $templateCache.put(widget.templateUrl, response);
-              deferred.resolve(response);
-            })
-            .error(function(){
-              deferred.reject('could not load template');
-            });
+          //$http.get(url)
+          //  .success(function(response){
+          //    // put response to cache, with unmodified url as key
+          //    $templateCache.put(widget.templateUrl, response);
+          //    deferred.resolve(response);
+          //  })
+          //  .error(function(){
+          //    deferred.reject('could not load template');
+          //  });
+
+            //jwu: above code not working
+            $http.get(url).then(function(response){
+                // put response to cache, with unmodified url as key
+                $templateCache.put(widget.templateUrl, response.data);
+                deferred.resolve(response.data);
+            }, (function(){
+                deferred.reject('could not load template');
+            }));
         }
       }
 
