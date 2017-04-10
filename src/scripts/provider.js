@@ -72,6 +72,24 @@ angular.module('adf.provider', ['adf.locale'])
           return this;
       };
 
+      var customWidgetTemplatePath = null;
+
+      /**
+       * @ngdoc method
+       * @name adf.dashboardProvider#customWidgetTemplatePath
+       * @propertyOf adf.dashboardProvider
+       * @description
+       *
+       * Changes the container template for the widgets
+       *
+       * @param {string} path to the custom widget template
+       *
+       * @returns {Object} self
+       */
+      this.customWidgetTemplatePath = function(templatePath) {
+          customWidgetTemplatePath = templatePath;
+          return this;
+      };
 
     var widgets = {};
     var widgetsPath = '';
@@ -254,6 +272,7 @@ angular.module('adf.provider', ['adf.locale'])
           locales: getLocales,
           activeLocale: getActiveLocale,
           translate: translate,
+          customWidgetTemplatePath: customWidgetTemplatePath,
 
         /**
          * @ngdoc method

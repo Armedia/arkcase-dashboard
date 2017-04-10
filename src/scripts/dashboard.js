@@ -296,9 +296,14 @@ angular.module('adf')
             title: model.title
           };
           editDashboardScope.structures = dashboard.structures;
+
+            var adfEditTemplatePath = adfTemplatePath + 'dashboard-edit.html';
+            if(model.editTemplateUrl) {
+                adfEditTemplatePath = model.editTemplateUrl;
+            }
           var instance = $modal.open({
             scope: editDashboardScope,
-            templateUrl: adfTemplatePath + 'dashboard-edit.html',
+            templateUrl: adfEditTemplatePath,
             backdrop: 'static'
           });
           $scope.changeStructure = function(name, structure){
@@ -330,9 +335,18 @@ angular.module('adf')
             widgets = dashboard.widgets;
           }
           addScope.widgets = widgets;
+
+            //pass translate function to the new scope so we can translate the labels inside the modal dialog
+            addScope.translate = $scope.translate;
+
+            var adfAddTemplatePath = adfTemplatePath + 'widget-add.html';
+            if(model.addTemplateUrl) {
+                adfAddTemplatePath = model.addTemplateUrl;
+            }
+
           var opts = {
             scope: addScope,
-            templateUrl: adfTemplatePath + 'widget-add.html',
+            templateUrl: adfAddTemplatePath,
             backdrop: 'static'
           };
           var instance = $modal.open(opts);

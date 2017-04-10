@@ -1,4 +1,5 @@
 <div class="modal-header">
+    <span>__hijacked__</span>
   <button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">&times;</button>
   <h4 class="modal-title">{{widget.title}}</h4>
 </div>
@@ -14,10 +15,9 @@
   </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default" ng-click="closeDialog()" ng-bind="translate('ADF_COMMON_CANCEL')">Cancel</button>
-    <button type="button" class="btn btn-primary" ng-click="saveDialog()" ng-bind="translate('ADF_COMMON_APPLY')">Apply</button>
-    <!-- above buttons rendered as blank ones; most likely CSS an issue. Hard code following until above is fixed -->
   <button type="button" class="btn btn-default" ng-click="closeDialog()">Cancel</button>
   <button type="button" class="btn btn-primary" ng-click="saveDialog()">Apply</button>
 </div>
 
+<!--<button type="button" class="btn btn-default" ng-click="closeDialog()" ng-bind="translate('ADF_COMMON_CANCEL')">Cancel</button>-->
+<!--<button type="button" class="btn btn-primary" ng-click="saveDialog()" ng-bind="translate('ADF_COMMON_APPLY')">Apply</button>-->
