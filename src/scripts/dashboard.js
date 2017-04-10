@@ -204,7 +204,8 @@ angular.module('adf')
         editable: '@',
         maximizable: '@',
         adfModel: '=',
-        adfWidgetFilter: '='
+        adfWidgetFilter: '=',
+          locale: '='
       },
       controller: function($scope){
         var model = {};
@@ -251,6 +252,19 @@ angular.module('adf')
         // edit mode
         $scope.editMode = false;
         $scope.editClass = '';
+
+          $scope.translate = dashboard.translate;
+          var activeLocale = dashboard.activeLocale();
+          if (activeLocale) {
+              dashboard.setLocale(activeLocale);
+          }
+
+          $scope.$watch('locale', function(oldVal, newVal) {
+              var activeLocale = dashboard.activeLocale();
+              if (newVal && newVal !== activeLocale) {
+                  dashboard.setLocale(newVal);
+              }
+          }, true);
 
         $scope.toggleEditMode = function(){
           $scope.editMode = ! $scope.editMode;

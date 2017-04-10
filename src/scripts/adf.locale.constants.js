@@ -31,8 +31,7 @@
 *
 * Holds settings and values for framework supported locales
 */
-/*
-angular.module('adf.locale')
+angular.module('adf.locale', [])
 .constant('adfLocale',
   {
     defaultLocale: 'en-GB',
@@ -84,4 +83,4 @@ angular.module('adf.locale')
     }
   }
 );
-*/
+
