@@ -31,12 +31,11 @@
  *
  * The dashboardProvider can be used to register structures and widgets.
  */
-angular.module('adf.provider', [])
-  .provider('dashboard', function(){
+angular.module('adf.provider', ['adf.locale'])
+  .provider('dashboard', function(adfLocale){
 
-      console.log("============================== happy day 111==================================");
-      var activeLocale = null; //adfLocale.defaultLocale;
-      var locales = null; //adfLocale.frameworkLocales;
+      var activeLocale = adfLocale.defaultLocale;
+      var locales = adfLocale.frameworkLocales;
 
       function getLocales() {
           return locales;
@@ -47,31 +46,29 @@ angular.module('adf.provider', [])
       }
 
       function translate(label) {
-          var translation = null; //locales[activeLocale][label];
+          var translation = locales[activeLocale][label];
           return translation ? translation : label;
       }
 
       this.setLocale = function(locale){
-          //if(locales[locale]) {
-          //    activeLocale = locale;
-          //} else {
-          //    throw new Error('Cannot set locale: ' + locale + '. Locale is not defined.');
-          //}
+          if(locales[locale]) {
+              activeLocale = locale;
+          } else {
+              throw new Error('Cannot set locale: ' + locale + '. Locale is not defined.');
+          }
 
-          console.log("============================== setLocale 222==================================");
           return this;
       };
       this.addLocale = function(locale, translations){
-          //if(!angular.isString(locale)) {
-          //    throw new Error('locale must be an string');
-          //}
-          //
-          //if(!angular.isObject(translations)) {
-          //    throw new Error('translations must be an object');
-          //}
-          //
-          //locales[locale] = translations;
-          console.log("============================== addLocale 333==================================");
+          if(!angular.isString(locale)) {
+              throw new Error('locale must be an string');
+          }
+
+          if(!angular.isObject(translations)) {
+              throw new Error('translations must be an object');
+          }
+
+          locales[locale] = translations;
           return this;
       };
 
@@ -253,6 +250,10 @@ angular.module('adf.provider', [])
         structures: structures,
         messageTemplate: messageTemplate,
         loadingTemplate: loadingTemplate,
+          setLocale: this.setLocale,
+          locales: getLocales,
+          activeLocale: getActiveLocale,
+          translate: translate,
 
         /**
          * @ngdoc method

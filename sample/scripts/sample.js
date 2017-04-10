@@ -60,7 +60,7 @@ angular.module('sample', [
             ADF_WIDGET_TOOLTIP_REMOVE: 'Remove widget'
         }
     );
-    dashboardProvider.setLocale('sv-SE');
+    //dashboardProvider.setLocale('sv-SE');
 
 
   $routeProvider.when('/sample/01', {

@@ -5,7 +5,7 @@
 <div class="modal-body">
   <form role="form">
     <div class="form-group">
-      <label for="widgetTitle">Title</label>
+      <label for="widgetTitle" ng-bind="translate('ADF_COMMON_TITLE')">Title</label>
       <input type="text" class="form-control" id="widgetTitle" ng-model="definition.title" placeholder="Enter title" required="">
     </div>
   </form>
@@ -14,6 +14,9 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-default" ng-click="closeDialog()">Cancel</button>
+  <button type="button" class="btn btn-default" ng-click="closeDialog()">Cancel</scan></button>
   <button type="button" class="btn btn-primary" ng-click="saveDialog()">Apply</button>
 </div>
+
+<!--<button type="button" class="btn btn-default" ng-click="closeDialog()" ng-bind="translate('ADF_COMMON_CANCEL')">Cancel</button>-->
+<!--<button type="button" class="btn btn-primary" ng-click="saveDialog()" ng-bind="translate('ADF_COMMON_APPLY')">Apply</button>-->
