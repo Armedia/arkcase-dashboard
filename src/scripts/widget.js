@@ -29,6 +29,10 @@ angular.module('adf')
 
     function preLink($scope){
       var definition = $scope.definition;
+
+        //passs translate function from dashboard so we can translate labels inside html templates
+        $scope.translate = dashboard.translate;
+
       if (definition) {
         var w = dashboard.widgets[definition.type];
         if (w) {
@@ -90,13 +94,15 @@ angular.module('adf')
           }
         }
         $element.remove();
-      }
+      };
         $scope.remove = function() {
           if($scope.options.enableConfirmDelete){
               var deleteScope= $scope.$new();
+              deleteScope.translate = dashboard.translate;
+
               var adfDeleteTemplatePath = adfTemplatePath + 'widget-delete.html';
               if (definition.deleteTemplateUrl) {
-                adfEditTemplatePath = definition.deleteTemplateUrl;
+                  adfDeleteTemplatePath = definition.deleteTemplateUrl;
               }
               var opts = {
                 scope: deleteScope,
@@ -117,7 +123,7 @@ angular.module('adf')
           else {
               deleteWidget();
           }
-        }
+        };
 
         // bind reload function
         $scope.reload = function(){
@@ -127,10 +133,17 @@ angular.module('adf')
         // bind edit function
         $scope.edit = function() {
           var editScope = $scope.$new();
+            editScope.translate = dashboard.translate;
           editScope.definition = angular.copy(definition);
+
+            var adfEditTemplatePath = adfTemplatePath + 'widget-edit.html';
+            if (definition.editTemplateUrl) {
+                adfEditTemplatePath = definition.editTemplateUrl;
+            }
+
           var opts = {
             scope: editScope,
-            templateUrl: adfTemplatePath + 'widget-edit.html',
+            templateUrl: adfEditTemplatePath,
             backdrop: 'static'
           };
 
@@ -147,7 +160,7 @@ angular.module('adf')
           };
           editScope.saveDialog = function() {
             definition.title = editScope.definition.title;
-            angular.extend(definition.config,editScope.definition.config);      
+            angular.extend(definition.config,editScope.definition.config);
             editScope.closeDialog();
          };
         };
@@ -160,7 +173,7 @@ angular.module('adf')
       replace: true,
       restrict: 'EA',
       transclude: false,
-      templateUrl: adfTemplatePath + 'widget.html',
+      templateUrl: dashboard.customWidgetTemplatePath ? dashboard.customWidgetTemplatePath : adfTemplatePath + 'widget.html',
       scope: {
         definition: '=',
         col: '=column',
@@ -170,7 +183,7 @@ angular.module('adf')
       },
 
       controller: function ($scope) {
-        
+
         $scope.$on("adfDashboardCollapseExapand",function(event,args){
            $scope.widgetState.isCollapsed = args.collapseExpandStatus;
          });
@@ -178,9 +191,15 @@ angular.module('adf')
         $scope.openFullScreen = function() {
           var definition = $scope.definition;
           var fullScreenScope = $scope.$new();
+            fullScreenScope.translate = dashboard.translate;
+
+            var fullscreenTemplateUrl = adfTemplatePath + 'widget-fullscreen.html';
+            if (definition.deleteTemplateUrl) {
+                fullscreenTemplateUrl = definition.deleteTemplateUrl;
+            }
           var opts = {
             scope: fullScreenScope,
-            templateUrl: adfTemplatePath + 'widget-fullscreen.html',
+            templateUrl: fullscreenTemplateUrl,
             size: definition.modalSize || 'lg', // 'sm', 'lg'
             backdrop: 'static',
             windowClass: (definition.fullScreen) ? 'dashboard-modal widget-fullscreen' : 'dashboard-modal'

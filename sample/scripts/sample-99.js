@@ -35,14 +35,21 @@ angular.module('sample-99', ['adf', 'LocalStorageModule'])
             // set default model for demo purposes
             model = {
                 title: "Sample 99",
-                titleTemplateUrl : "partials/custom-dashboard-title.html",
+                //titleTemplateUrl : "partials/custom-dashboard-title.html",
+                titleTemplateUrl : "my_templates/dashboard-title.html",
+                editTemplateUrl : "my_templates/dashboard-edit.html",
+                addTemplateUrl : "my_templates/widget-add.html",
                 structure: "6-6",
                 rows: [{
                     columns: [{
                         styleClass: "col-md-6",
                         widgets: [{
                             title: 'Description',
-                            titleTemplateUrl: 'partials/custom-widget-title.html',
+                            //titleTemplateUrl: 'partials/custom-widget-title.html',
+                            titleTemplateUrl: 'my_templates/widget-title.html',
+                            editTemplateUrl: 'my_templates/widget-edit.html',
+                            deleteTemplateUrl: 'my_templates/widget-delete.html',
+                            fullscreenTemplateUrl: 'my_templates/widget-fullscreen.html',
                             type: 'markdown',
                             config: {
                                 content: 'This sample uses a widget filter, to restrict the widget selection on the "add dialog".\n\nIt also shows the ability to use custom templates for the dashboard title and widget title.'
@@ -52,7 +59,11 @@ angular.module('sample-99', ['adf', 'LocalStorageModule'])
                         styleClass: "col-md-6",
                         widgets: [{
                             title: 'Restangular',
-                            titleTemplateUrl: 'partials/custom-widget-title.html',
+                            //titleTemplateUrl: 'partials/custwidgetom-widget-title.html',
+                            titleTemplateUrl: 'my_templates/widget-title.html',
+                            editTemplateUrl: 'my_templates/widget-edit.html',
+                            deleteTemplateUrl: 'my_templates/widget-delete.html',
+                            fullscreenTemplateUrl: 'my_templates/widget-fullscreen.html',
                             type: 'githubAuthor',
                             config: {
                                 path: 'mgonto/restangular'
