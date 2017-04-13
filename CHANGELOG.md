@@ -1,22 +1,15 @@
-# 0.10.2
-
-## Enhancements
-
-* second test for bower install
-* added locale support
-
-
-## Bug fixes
-
-* Fixed broken sample links
-* Fixed $http.get() exception in widget conent
-* Fixed gulpfile.js not generating dist js file correctly
-
 # 0.10.1
 
 ## Enhancements
 
-* first use as a test for bower install
+* Added locale support
+* Added template customization support
+
+## Bug fixes
+
+* Fixed gulpfile.js not generating dist js file correctly
+* Fixed broken sample links
+* Fixed $http.get() exception in widget conent
 
 
 # 0.10.0
