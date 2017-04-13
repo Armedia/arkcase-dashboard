@@ -43,7 +43,29 @@ angular.module('adf')
 
           if (!definition.titleTemplateUrl) {
             definition.titleTemplateUrl = adfTemplatePath + 'widget-title.html';
+              if (w.titleTemplateUrl) {
+                  definition.titleTemplateUrl = w.titleTemplateUrl;
+              }
           }
+            if (!definition.deleteTemplateUrl) {
+                definition.deleteTemplateUrl = adfTemplatePath + 'widget-delete.html';
+                if (w.deleteTemplateUrl) {
+                    definition.deleteTemplateUrl = w.deleteTemplateUrl;
+                }
+            }
+            if (!definition.editTemplateUrl) {
+                definition.editTemplateUrl = adfTemplatePath + 'widget-edit.html';
+                if (w.editTemplateUrl) {
+                    definition.editTemplateUrl = w.editTemplateUrl;
+                }
+            }
+            if (!definition.fullscreenTemplateUrl) {
+                definition.fullscreenTemplateUrl = adfTemplatePath + 'widget-fullscreen.html';
+                if (w.fullscreenTemplateUrl) {
+                    definition.fullscreenTemplateUrl = w.fullscreenTemplateUrl;
+                }
+            }
+
 
           // set id for sortable
           if (!definition.wid){
@@ -100,10 +122,9 @@ angular.module('adf')
               var deleteScope= $scope.$new();
               deleteScope.translate = dashboard.translate;
 
-              var adfDeleteTemplatePath = adfTemplatePath + 'widget-delete.html';
-              if (definition.deleteTemplateUrl) {
-                  adfDeleteTemplatePath = definition.deleteTemplateUrl;
-              }
+              var adfDeleteTemplatePath = (definition.deleteTemplateUrl)? definition.deleteTemplateUrl
+                  : adfTemplatePath + 'widget-delete.html';
+
               var opts = {
                 scope: deleteScope,
                 templateUrl: adfDeleteTemplatePath,
@@ -136,10 +157,8 @@ angular.module('adf')
             editScope.translate = dashboard.translate;
           editScope.definition = angular.copy(definition);
 
-            var adfEditTemplatePath = adfTemplatePath + 'widget-edit.html';
-            if (definition.editTemplateUrl) {
-                adfEditTemplatePath = definition.editTemplateUrl;
-            }
+            var adfEditTemplatePath = (definition.editTemplateUrl)? definition.editTemplateUrl
+                : adfTemplatePath + 'widget-edit.html';
 
           var opts = {
             scope: editScope,
@@ -193,10 +212,9 @@ angular.module('adf')
           var fullScreenScope = $scope.$new();
             fullScreenScope.translate = dashboard.translate;
 
-            var fullscreenTemplateUrl = adfTemplatePath + 'widget-fullscreen.html';
-            if (definition.deleteTemplateUrl) {
-                fullscreenTemplateUrl = definition.deleteTemplateUrl;
-            }
+            var fullscreenTemplateUrl = (definition.fullscreenTemplateUrl)? definition.fullscreenTemplateUrl
+                : adfTemplatePath + 'widget-fullscreen.html';
+
           var opts = {
             scope: fullScreenScope,
             templateUrl: fullscreenTemplateUrl,
