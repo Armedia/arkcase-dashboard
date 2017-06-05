@@ -38,26 +38,26 @@ angular.module('sample', [
 
     dashboardProvider.addLocale('de-DE',
         {
-            ADF_COMMON_CLOSE: 'Schließen',
-            ADF_COMMON_DELETE: 'Löschen',
-            ADF_COMMON_TITLE: 'Title',
-            ADF_COMMON_CANCEL: 'Cancel',
-            ADF_COMMON_APPLY: 'Apply',
-            ADF_COMMON_EDIT_DASHBOARD: 'Edit dashboard',
-            ADF_EDIT_DASHBOARD_STRUCTURE_LABEL: 'Structure',
-            ADF_DASHBOARD_TITLE_TOOLTIP_ADD: 'Add new widget',
-            ADF_DASHBOARD_TITLE_TOOLTIP_SAVE: 'Save changes',
-            ADF_DASHBOARD_TITLE_TOOLTIP_EDIT_MODE: 'Enable edit mode',
-            ADF_DASHBOARD_TITLE_TOOLTIP_UNDO: 'Undo changes',
-            ADF_WIDGET_ADD_HEADER: 'Add new widget',
-            ADF_WIDGET_DELETE_CONFIRM_MESSAGE: 'Are you sure you want to delete this widget ?',
-            ADF_WIDGET_TOOLTIP_REFRESH: 'Reload Widget Content',
-            ADF_WIDGET_TOOLTIP_MOVE: 'Change widget location',
-            ADF_WIDGET_TOOLTIP_COLLAPSE: 'Collapse widget',
-            ADF_WIDGET_TOOLTIP_EXPAND: 'Expand widget',
-            ADF_WIDGET_TOOLTIP_EDIT: 'Edit widget configuration',
-            ADF_WIDGET_TOOLTIP_FULLSCREEN: 'Fullscreen widget',
-            ADF_WIDGET_TOOLTIP_REMOVE: 'Remove widget'
+            ADF_COMMON_CLOSE: "Schließen",
+            ADF_COMMON_DELETE: "Löschen",
+            ADF_COMMON_TITLE: "Titel",
+            ADF_COMMON_CANCEL: "Abbrechen",
+            ADF_COMMON_APPLY: "Übernehmen",
+            ADF_COMMON_EDIT_DASHBOARD: "Dashboard bearbeiten",
+            ADF_EDIT_DASHBOARD_STRUCTURE_LABEL: "Struktur",
+            ADF_DASHBOARD_TITLE_TOOLTIP_ADD: "Neues Widget hinzufügen",
+            ADF_DASHBOARD_TITLE_TOOLTIP_SAVE: "Änderungen speichern",
+            ADF_DASHBOARD_TITLE_TOOLTIP_EDIT_MODE: "Editiermodus aktivieren",
+            ADF_DASHBOARD_TITLE_TOOLTIP_UNDO: "Änderungen rückgängig machen",
+            ADF_WIDGET_ADD_HEADER: "Neues Widget hinzufügen",
+            ADF_WIDGET_DELETE_CONFIRM_MESSAGE: "Bist du sicher, dass du dieses Widget löschen möchtest?",
+            ADF_WIDGET_TOOLTIP_REFRESH: "Widget Content neu laden",
+            ADF_WIDGET_TOOLTIP_MOVE: "Widget-Speicherort ändern",
+            ADF_WIDGET_TOOLTIP_COLLAPSE: "Collapse widget",
+            ADF_WIDGET_TOOLTIP_EXPAND: "Expand Widget",
+            ADF_WIDGET_TOOLTIP_EDIT: "Widget-Konfiguration bearbeiten",
+            ADF_WIDGET_TOOLTIP_FULLSCREEN: "Fullscreen-Widget",
+            ADF_WIDGET_TOOLTIP_REMOVE: "Widget entfernen"
         }
     );
     //dashboardProvider.setLocale('sv-SE');
@@ -88,7 +88,7 @@ angular.module('sample', [
   });
 
 })
-.controller('navigationCtrl', function($scope, $location){
+.controller('navigationCtrl', function($scope, $location, dashboard){
 
   $scope.navCollapsed = true;
 
@@ -105,4 +105,8 @@ angular.module('sample', [
     return page === currentRoute || new RegExp(page).test(currentRoute) ? 'active' : '';
   };
 
+  $scope.changeLocale = function(lang) {
+      console.log("lang=" + lang);
+      dashboard.setLocale(lang);
+  };
 });
