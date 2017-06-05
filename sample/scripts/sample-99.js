@@ -26,9 +26,6 @@
 angular.module('sample-99', ['adf', 'LocalStorageModule'])
     .controller('sample99Ctrl', function($scope, localStorageService) {
 
-        $scope.locale = 'sv-SE';
-        //$scope.locale = 'de-DE';
-
         var name = 'sample-99';
         var model = localStorageService.get(name);
         if (!model) {
