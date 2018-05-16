@@ -567,12 +567,17 @@ angular.module('adf')
           $scope.editMode = ! $scope.editMode;
           if ($scope.editMode){
             $scope.modelCopy = angular.copy($scope.adfModel, {});
+            $rootScope.$broadcast('adfDashboardEditMode', name, model);
           }
 
           if (!$scope.editMode){
             $rootScope.$broadcast('adfDashboardChanged', name, model);
           }
         };
+		
+		$scope.$on('adfDashboardRetrieveChangedModel', function() {
+		  $rootScope.$broadcast('adfDashboardChanged', name, model);
+		});
 
         $scope.collapseAll = function(collapseExpandStatus){
             $rootScope.$broadcast('adfDashboardCollapseExapand',{collapseExpandStatus : collapseExpandStatus});
