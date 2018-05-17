@@ -59,13 +59,13 @@ var protractorOptions = {
 
 /** lint **/
 
-gulp.task('csslint', function(){
+gulp.task('csslint', function () {
     gulp.src('src/styles/*.css')
         .pipe($.csslint())
         .pipe($.csslint.reporter());
 });
 
-gulp.task('jslint', function(){
+gulp.task('jslint', function () {
     gulp.src('src/scripts/*.js')
         .pipe($.jshint())
         .pipe($.jshint.reporter(jsReporter));
@@ -75,13 +75,13 @@ gulp.task('lint', ['csslint', 'jslint']);
 
 /** clean **/
 
-gulp.task('clean', function(cb){
+gulp.task('clean', function (cb) {
     del(['dist', '.tmp'], cb);
 });
 
 /** build **/
 
-gulp.task('css', function(){
+gulp.task('css', function () {
     gulp.src('src/styles/*.css')
         .pipe($.concat(name + '.css'))
         .pipe(gulp.dest('dist/'))
@@ -92,7 +92,7 @@ gulp.task('css', function(){
 
 
 const filter = $.filter('**/*.html', {restore: true});
-gulp.task('js', function(){
+gulp.task('js', function () {
     gulp.src(['src/scripts/*.js', 'src/templates/*.html'])
         .pipe(filter)
         .pipe($.if('*.html', $.minifyHtml(minifyHtmlOptions)))
@@ -115,19 +115,19 @@ gulp.task('build', ['css', 'js']);
 
 /** build docs **/
 
-gulp.task('docs', function(){
+gulp.task('docs', function () {
     return gulp.src('src/scripts/*.js')
         .pipe($.ngdocs.process(ngdocOptions))
         .pipe(gulp.dest('./dist/docs'));
 });
 
 /** build sample **/
-gulp.task('install-widgets', function(){
+gulp.task('install-widgets', function () {
     return gulp.src('sample/widgets/*/bower.json')
         .pipe($.install());
 });
 
-gulp.task('widget-templates', ['install-widgets'], function(){
+gulp.task('widget-templates', ['install-widgets'], function () {
     var opts = {
         root: '{widgetsPath}',
         module: 'sample'
@@ -138,7 +138,7 @@ gulp.task('widget-templates', ['install-widgets'], function(){
         .pipe(gulp.dest('.tmp'));
 });
 
-gulp.task('sample-templates', function(){
+gulp.task('sample-templates', function () {
     var opts = {
         root: 'partials',
         module: 'sample'
@@ -149,7 +149,7 @@ gulp.task('sample-templates', function(){
         .pipe(gulp.dest('.tmp'));
 });
 
-gulp.task('dashboard-templates', function(){
+gulp.task('dashboard-templates', function () {
     var opts = {
         root: '../src/templates',
         module: 'adf'
@@ -160,16 +160,16 @@ gulp.task('dashboard-templates', function(){
         .pipe(gulp.dest('.tmp'));
 });
 
-gulp.task('copy-font', function(){
+gulp.task('copy-font', function () {
     gulp.src('sample/components/bootstrap/dist/fonts/*')
         .pipe(gulp.dest('dist/sample/fonts'));
 });
 
-gulp.task('sample', ['widget-templates', 'sample-templates', 'dashboard-templates', 'copy-font'], function(){
+gulp.task('sample', ['widget-templates', 'sample-templates', 'dashboard-templates', 'copy-font'], function () {
     var templates = gulp.src('.tmp/*.js', {read: false});
     var assets = $.useref.assets();
     gulp.src('sample/index.html')
-        // inject templates
+    // inject templates
         .pipe($.inject(templates, {relative: true}))
         .pipe(assets)
         .pipe($.if('*.js', $.replace('<<adfVersion>>', pkg.version)))
@@ -185,7 +185,7 @@ gulp.task('sample', ['widget-templates', 'sample-templates', 'dashboard-template
 
 /** livereload **/
 
-gulp.task('watch', function(){
+gulp.task('watch', function () {
     var paths = [
         'src/scripts/*.js',
         'src/styles/*.css',
@@ -200,18 +200,18 @@ gulp.task('watch', function(){
         'sample/widgets/*/src/*.css',
         'sample/widgets/*/src/*.html'
     ];
-    gulp.watch(paths).on('change', function(file){
+    gulp.watch(paths).on('change', function (file) {
         gulp.src(file.path)
             .pipe(connect.reload());
     });
 });
 
-gulp.task('webserver', ['install-widgets'], function(){
+gulp.task('webserver', ['install-widgets'], function () {
     connect.server({
         port: 9001,
         livereload: true,
         // redirect / to /sample
-        middleware: function() {
+        middleware: function () {
             return [
                 modRewrite([
                     '^/$ /sample/ [R]'
@@ -243,23 +243,23 @@ gulp.task('webdriver_update', webdriver_update);
 gulp.task('webdriver_standalone', webdriver_standalone);
 
 // start webserver for e2e tests
-gulp.task('e2e-server', ['install-widgets'], function(){
+gulp.task('e2e-server', ['install-widgets'], function () {
     connect.server({
         port: 9003
     });
 });
 
 // Setting up the test task
-gulp.task('e2e', ['e2e-server', 'webdriver_update'], function(cb) {
+gulp.task('e2e', ['e2e-server', 'webdriver_update'], function (cb) {
     gulp.src('e2e/*Spec.js')
         .pipe(protractor(protractorOptions))
-        .on('error', function(e) {
+        .on('error', function (e) {
             // stop webserver
             connect.serverClose();
             // print test results
             console.log(e);
         })
-        .on('end', function(){
+        .on('end', function () {
             // stop webserver
             connect.serverClose();
             cb();
